@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <f:facet name="first">
+        <meta content="charset=UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Donut"/>
+        <meta name="author" content="Andrey Krupchak"/>
+    </f:facet>
+    <title>Donut</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <style>
+        .Bimage{background-image:url("resources/img/donut.jpg"); }
+    </style>
+</h:head>
+
+<h:body styleClass="Bimage">
+    <div class="col-lg-8 container">
+        <div class="panel panel-default">
+            <div style="text-align: center" class="panel-heading"><span style="color: #4e555b;font-size: 45px"
+                                                                        class="lead">Top Delicious</span></div>
+            <table class="table table-dark table-striped STAND">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody id="Tbody">
+                <ui:repeat var="p" value="#{stand.getProductDTOS()}" varStatus="status" >
+                    <tr>
+                        <td>#{p.category}</td>
+                        <td>#{p.name}</td>
+                        <td>#{p.description}</td>
+                        <td>#{p.price}₽</td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</h:body>
+
+
+<h:form id="form">
+    <a4j:push address="#{stand.CDI_PUSH_TOPIC}"
+              onerror="console.log(event.rf.data)"
+              ondataavailable="console.log(event.rf.data);reRenderStand(event.rf.data); ">
+    </a4j:push>
+</h:form>
+
+<h:outputScript library="js" name="jquery-3.2.1.min.js" target="body"/>
+<h:outputScript library="js" name="bootstrap.min.js" target="body"/>
+<h:outputScript library="js" name="wsDonut.js" target="body"/>
+</html>
