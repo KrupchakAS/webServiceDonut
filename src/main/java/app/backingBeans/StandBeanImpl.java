@@ -54,8 +54,7 @@ public class StandBeanImpl implements StandBean {
 
     @Override
     public void updateProductList(List<ProductDTO> productDTO) {
-        productDTOS.clear();
-        productDTOS.addAll(productDTO);
+        productDTOS = productDTO;
         logger.info("Storage Successfully Updated!");
         sendUpdate();
     }
